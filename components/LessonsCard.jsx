@@ -1,0 +1,93 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Feather } from '@expo/vector-icons'
+import { globalStyles } from '../styles/global'
+
+const LessonsCard = () => {
+  const lessons = [
+    {
+      id: 1,
+      title: 'Listening',
+      subtitle: 'Understand everyday English.',
+      primarybgcolor: '#dfead9',
+      txtcolor: '#263f39',
+      iconcolor: '#263f39',
+      bordercolor: '#d5e0d0',
+      icon: 'headphones'
+    },
+    {
+      id: 2,
+      title: 'Grammar',
+      subtitle: 'Learn how sentences work.',
+      primarybgcolor: '#f8d8ca',
+      txtcolor: '#263f39',
+      iconcolor: '#b55c49',
+      bordercolor: '#efd0c3',
+      icon: 'edit-3'
+    },
+    {
+      id: 3,
+      title: 'Vocabulary',
+      subtitle: 'Build your vocabulary.',
+      primarybgcolor: '#d9e2ea',
+      txtcolor: '#263f39',
+      iconcolor: '#4996b5',
+      bordercolor: '#d2dbe2',
+      icon: 'book-open'
+    }
+  ]
+  return (
+    <View style={styles.container}>
+      {lessons.map((lesson) => (
+        <View
+          key={lesson.id}
+          style={[
+            styles.cards,
+            globalStyles.shadow,
+            {
+              backgroundColor: lesson.primarybgcolor,
+              borderColor: lesson.bordercolor,
+              borderWidth: 2
+            }
+          ]}
+        >
+          <View style={styles.cardheader}>
+            <Feather style={{
+              backgroundColor: '#f5f1dc',
+              color: lesson.iconcolor,
+              padding: 12,
+              borderRadius: 14
+            }} name={lesson.icon} size={20} />
+            <Feather style={{
+              backgroundColor: '#f5f1dc',
+              color: lesson.iconcolor,
+              padding: 6,
+              borderRadius: 20
+            }} name='arrow-right' size={20} />
+          </View>
+          <Text style={{ color: lesson.txtcolor, fontSize: 18, fontWeight: '600', marginBottom: 5 }}>{lesson.title}</Text>
+          <Text style={{ color: lesson.txtcolor, fontWeight: '300' }}>{lesson.subtitle}</Text>
+        </View>
+      ))}
+    </View>
+  )
+}
+
+export default LessonsCard
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    gap: 15
+  },
+  cards: {
+    padding: 18,
+    borderRadius: 20
+  },
+  cardheader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 20
+  }
+})
