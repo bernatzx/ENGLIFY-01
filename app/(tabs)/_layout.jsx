@@ -9,7 +9,6 @@ const TabLayout = () => {
       <Tabs tabBar={(props) => <TabBarButton {...props} />} screenOptions={{ headerShown: false }}>
         <Tabs.Screen name='index' options={{ title: 'Home' }} />
         <Tabs.Screen name='lessons' options={{ title: 'Lessons' }} />
-        <Tabs.Screen name='quiz' options={{ title: 'Quiz' }} />
         <Tabs.Screen name='profile' options={{ title: 'Profile' }} />
       </Tabs>
     </SafeAreaView>
