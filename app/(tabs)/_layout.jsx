@@ -8,7 +8,7 @@ const TabLayout = () => {
     <SafeAreaView style={{ flex: 1, paddingTop: 20, paddingHorizontal: 20 }}>
       <Tabs tabBar={(props) => <TabBarButton {...props} />} screenOptions={{ headerShown: false }}>
         <Tabs.Screen name='index' options={{ title: 'Home' }} />
-        <Tabs.Screen name='lessons' options={{ title: 'Lessons' }} />
+        <Tabs.Screen name='history' options={{ title: 'History' }} />
         <Tabs.Screen name='profile' options={{ title: 'Profile' }} />
       </Tabs>
     </SafeAreaView>

@@ -6,12 +6,14 @@ import LessonsSection from '../../components/LessonsSection'
 const Home = () => {
 
   return (
-    <View style={{ flex: 1 }}>
-      <HomeHeader />
-      <ScrollView style={{ flex: 1 }}>
-        <LessonsSection />
-      </ScrollView>
-    </View>
+    <>
+      <View style={{ flex: 1 }}>
+        <HomeHeader />
+        <ScrollView style={{ flex: 1 }}>
+          <LessonsSection />
+        </ScrollView>
+      </View>
+    </>
   )
 }
 

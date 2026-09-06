@@ -9,7 +9,7 @@ export function TabBarButton({ state, descriptors, navigation }) {
   const { buildHref } = useLinkBuilder();
   const icons = {
     index: (props) => <Feather name='home' size={20} {...props} />,
-    lessons: (props) => <MaterialCommunityIcons name='bookshelf' size={20} {...props} />,
+    history: (props) => <MaterialCommunityIcons name='bookshelf' size={20} {...props} />,
     quiz: (props) => <MaterialCommunityIcons name='clipboard-check-outline' size={20} {...props} />,
     profile: (props) => <Feather name='user' size={20} {...props} />
   }
