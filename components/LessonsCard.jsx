@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { globalStyles } from '../styles/global'
+import { fontStyles } from '../styles/fonts'
 
 const LessonsCard = () => {
   const lessons = [
@@ -10,7 +11,6 @@ const LessonsCard = () => {
       title: 'Grammar',
       subtitle: 'Learn how sentences work.',
       primarybgcolor: '#f8d8ca',
-      txtcolor: '#263f39',
       iconcolor: '#b55c49',
       bordercolor: '#efd0c3',
       icon: 'edit-3'
@@ -20,7 +20,6 @@ const LessonsCard = () => {
       title: 'Vocabulary',
       subtitle: 'Build your vocabulary.',
       primarybgcolor: '#d9e2ea',
-      txtcolor: '#263f39',
       iconcolor: '#4996b5',
       bordercolor: '#d2dbe2',
       icon: 'book-open'
@@ -55,8 +54,18 @@ const LessonsCard = () => {
               borderRadius: 20
             }} name='arrow-right' size={20} />
           </View>
-          <Text style={{ color: lesson.txtcolor, fontSize: 18, fontWeight: '600', marginBottom: 5 }}>{lesson.title}</Text>
-          <Text style={{ color: lesson.txtcolor, fontWeight: '300' }}>{lesson.subtitle}</Text>
+          <Text style={[
+            fontStyles.title,
+            fontStyles.primary_color,
+            {
+              fontSize: 26,
+              marginBottom: 5
+            }
+          ]}>{lesson.title}</Text>
+          <Text style={[
+            fontStyles.subtitle,
+            fontStyles.primary_color
+          ]}>{lesson.subtitle}</Text>
         </View>
       ))}
     </View>
@@ -78,6 +87,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20
+    marginBottom: 8
   }
 })

@@ -5,6 +5,7 @@ import LessonsSection from '../../components/LessonsSection'
 import { globalStyles } from '../../styles/global'
 import { useRouter } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { fontStyles } from '../../styles/fonts'
 
 const Home = () => {
   const router = useRouter()
@@ -16,7 +17,7 @@ const Home = () => {
   return (
     <>
       <View style={{ flex: 1 }}>
-        
+
         {/* HOME HEADER UI */}
         <HomeHeader />
 
@@ -26,11 +27,22 @@ const Home = () => {
           <LessonsSection />
 
           {/* READY ASKING SECTION */}
-          <Text style={styles.ready_qstn}>
+          <Text style={[
+            styles.ready_qstn,
+            fontStyles.subtitle_bold,
+            fontStyles.secondary_color,
+            { fontSize: 18, paddingBottom: 15 }
+          ]}>
             Ready for your daily exam?
           </Text>
-          <Pressable onPress={startExam} style={[styles.ready_btn, globalStyles.shadow]}>
-            <Text style={styles.ready_txt}>
+          <Pressable onPress={startExam} style={[
+            styles.ready_btn,
+            globalStyles.shadow
+          ]}>
+            <Text style={[
+              fontStyles.title,
+              { fontSize: 36, textAlign: 'center', color: '#eee' }
+            ]}>
               Ready
             </Text>
           </Pressable>
@@ -44,23 +56,12 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
-  ready_qstn: {
-    fontSize: 18,
-    paddingBottom: 15,
-    fontWeight: '500'
-  },
   ready_btn: {
-    padding: 15,
-    borderRadius: 14,
+    padding: 8,
+    borderRadius: 50,
     borderColor: '#f7cace',
+    marginHorizontal: 50,
     borderWidth: 2,
     backgroundColor: '#f2d1d4'
-  },
-  ready_txt: {
-    fontSize: 24,
-    textAlign: 'center',
-    color: '#d8959b',
-    textTransform: 'uppercase',
-    fontWeight: '600'
   }
 })

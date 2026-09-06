@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../styles/global';
 import { useRouter } from 'expo-router';
+import { fontStyles } from '../styles/fonts';
 
 const HomeHeader = () => {
   const router = useRouter();
@@ -12,21 +13,36 @@ const HomeHeader = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={{ flexDirection: 'column' }}>
       <View style={styles.head}>
         <View style={{ flexDirection: 'column', gap: 8 }}>
-          <Text style={styles.date}>{currentDate}</Text>
-          <Text style={styles.greet}>Good Morning,</Text>
+          <Text style={[
+            fontStyles.subtitle_bold,
+            fontStyles.secondary_color
+          ]}>{currentDate}</Text>
+          <Text style={[
+            styles.greet,
+            fontStyles.title,
+            fontStyles.primary_color
+          ]}>Good Morning,</Text>
         </View>
         <Pressable
           style={[styles.initial, globalStyles.shadow]}
           onPress={() => router.navigate('profile')}
         >
-          <Text style={{ color: '#315c50', fontWeight: '600', fontSize: 16 }}>I</Text>
+          <Text style={[
+            fontStyles.subtitle_bold,
+            fontStyles.secondary_color,
+            { fontSize: 16 }
+          ]}>I</Text>
         </Pressable>
       </View>
       <View>
-        <Text style={[styles.greet, { marginTop: -8 }]}>Indri</Text>
+        <Text style={[
+          styles.greet,
+          fontStyles.title,
+          fontStyles.primary_color
+        ]}>Indri</Text>
       </View>
     </View>
   )
@@ -35,22 +51,13 @@ const HomeHeader = () => {
 export default HomeHeader
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column'
-  },
   head: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  date: {
-    color: '#315c50',
-    fontWeight: '600'
-  },
   greet: {
-    color: '#315c50',
-    fontSize: 32,
-    fontWeight: 'bold'
+    fontSize: 48
   },
   initial: {
     backgroundColor: '#f3e9cd',
