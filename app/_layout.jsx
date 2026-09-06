@@ -5,8 +5,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 const RootLayout = () => {
   return (
     <SafeAreaProvider>
-      <Stack>
-        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name='(tabs)' />
+        <Stack.Screen name="exam" options={{ gestureEnabled: false }} />
       </Stack>
     </SafeAreaProvider>
   )
