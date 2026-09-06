@@ -1,10 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export const colors = {
-  bgcolor: '#f9e1c9',
-  primary: '#657166',
-  secondary: '#cfd6c4',
-  white: '#f8ede3'
+  BG: '#f9e1c9',
+  PRIMARY: '#657166',
+  PRIMARY_LIGTH: '#6e8b82',
+  SECONDARY: '#cfd6c4',
+  WHITE: '#f8ede3'
+}
+
+export const fonts = {
+  PRIMARY: 'PatrickHand',
+  SECONDARY: 'Quicksand',
+  BOLD: 'Quicksand-Bold'
 }
 
 export const globalStyles = StyleSheet.create({
