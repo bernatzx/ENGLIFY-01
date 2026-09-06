@@ -10,7 +10,7 @@ const LessonsSection = () => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={{ fontSize: 20, fontWeight: '500' }}>Build your fluency</Text>
+        <Text style={{ fontSize: 20, fontWeight: '500'}}>Build your english skill</Text>
         <Pressable
           style={styles.titlebutton}
           onPress={() => router.navigate('/lessons')}
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingBottom: 10
+    paddingBottom: 15,
+    paddingTop: 35
   },
   titlebutton: {
     flexDirection: 'row',

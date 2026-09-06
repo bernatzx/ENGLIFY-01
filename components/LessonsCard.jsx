@@ -7,16 +7,6 @@ const LessonsCard = () => {
   const lessons = [
     {
       id: 1,
-      title: 'Listening',
-      subtitle: 'Understand everyday English.',
-      primarybgcolor: '#dfead9',
-      txtcolor: '#263f39',
-      iconcolor: '#263f39',
-      bordercolor: '#d5e0d0',
-      icon: 'headphones'
-    },
-    {
-      id: 2,
       title: 'Grammar',
       subtitle: 'Learn how sentences work.',
       primarybgcolor: '#f8d8ca',
@@ -26,7 +16,7 @@ const LessonsCard = () => {
       icon: 'edit-3'
     },
     {
-      id: 3,
+      id: 2,
       title: 'Vocabulary',
       subtitle: 'Build your vocabulary.',
       primarybgcolor: '#d9e2ea',
