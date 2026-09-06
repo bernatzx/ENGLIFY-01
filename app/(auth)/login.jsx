@@ -52,7 +52,7 @@ const Login = () => {
 
       <View style={{ width: '100%', paddingTop: 35, flexDirection: 'column', gap: 14 }}>
         <View style={styles.input}>
-          <Feather color={colors.primary} name="mail" size={32} />
+          <Feather color={colors.primary} name="mail" size={20} />
           <TextInput
             style={[fontStyles.title, { fontSize: 18, flex: 1, color: colors.primary }]}
             placeholder="Email"
@@ -64,7 +64,7 @@ const Login = () => {
         </View>
 
         <View style={styles.input}>
-          <Feather color={colors.primary} name="lock" size={32} />
+          <Feather color={colors.primary} name="lock" size={20} />
           <TextInput
             style={[fontStyles.title, { fontSize: 18, flex: 1, color: colors.primary }]}
             placeholder="Password"
@@ -73,7 +73,7 @@ const Login = () => {
             secureTextEntry={!showPassword}
           />
           <Pressable onPress={() => setShowPassword(!showPassword)}>
-            <Feather color={colors.primary} name={showPassword ? 'eye' : 'eye-off'} size={32} />
+            <Feather color={colors.primary} name={showPassword ? 'eye' : 'eye-off'} size={20} />
           </Pressable>
         </View>
 
@@ -90,10 +90,10 @@ const Login = () => {
 
       <View style={{ width: '100%', paddingTop: 35, flexDirection: 'column', gap: 14 }}>
         <Pressable onPress={handleLogin} style={styles.login_btn}>
-          <Text style={[fontStyles.title, { fontSize: 24, color: colors.secondary }]}>
+          <Text style={[fontStyles.title, { fontSize: 24, color: colors.white }]}>
             Login
           </Text>
-          <Feather color={colors.secondary} name="arrow-right" size={32} />
+          <Feather color={colors.white} name="arrow-right" size={20} />
         </Pressable>
         <View style={styles.signup}>
           <Text style={[fontStyles.subtitle, { color: colors.primary }]}>Don't have an account? </Text>
@@ -124,10 +124,11 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 25,
     paddingVertical: 8,
-    gap: 25
+    gap: 14
   },
   login_btn: {
     backgroundColor: colors.primary,
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 14,

@@ -24,47 +24,29 @@ const Register = () => {
   return (
     <View style={styles.container}>
 
-      {/* Header */}
       <View>
         <Text style={[
           fontStyles.title,
-          fontStyles.primary_color,
           {
-            fontSize: 56
+            fontSize: 56,
+            color: colors.primary
           }
         ]}>
           Create Account
         </Text>
-
         <Text style={[
           fontStyles.subtitle_bold,
-          fontStyles.secondary_color,
-          { textAlign: 'center' }
+          { textAlign: 'center', color: colors.primary }
         ]}>
           Start your English learning journey
         </Text>
       </View>
 
-      {/* Form */}
       <View style={styles.form}>
-
-        {/* Name */}
         <View style={styles.input}>
-          <Feather
-            style={fontStyles.secondary_color}
-            name="user"
-            size={32}
-          />
-
+          <Feather color={colors.primary} name="user" size={20} />
           <TextInput
-            style={[
-              fontStyles.title,
-              fontStyles.secondary_color,
-              {
-                fontSize: 18,
-                flex: 1
-              }
-            ]}
+            style={[fontStyles.title, styles.text_field]}
             placeholder="Full Name"
             value={name}
             onChangeText={setName}
@@ -72,23 +54,10 @@ const Register = () => {
           />
         </View>
 
-        {/* Email */}
         <View style={styles.input}>
-          <Feather
-            style={fontStyles.secondary_color}
-            name="mail"
-            size={32}
-          />
-
+          <Feather color={colors.primary} name="mail" size={20} />
           <TextInput
-            style={[
-              fontStyles.title,
-              fontStyles.secondary_color,
-              {
-                fontSize: 18,
-                flex: 1
-              }
-            ]}
+            style={[fontStyles.title, styles.text_field]}
             placeholder="Email"
             value={email}
             onChangeText={setEmail}
@@ -97,120 +66,51 @@ const Register = () => {
           />
         </View>
 
-        {/* Password */}
         <View style={styles.input}>
-          <Feather
-            style={fontStyles.secondary_color}
-            name="lock"
-            size={32}
-          />
-
+          <Feather color={colors.primary} name="lock" size={20} />
           <TextInput
-            style={[
-              fontStyles.title,
-              fontStyles.secondary_color,
-              {
-                fontSize: 18,
-                flex: 1
-              }
-            ]}
+            style={[fontStyles.title, styles.text_field]}
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry={!showPassword}
           />
-
-          <Pressable
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            <Feather
-              style={fontStyles.secondary_color}
-              name={showPassword ? 'eye' : 'eye-off'}
-              size={32}
-            />
+          <Pressable onPress={() => setShowPassword(!showPassword)}>
+            <Feather color={colors.primary} name={showPassword ? 'eye' : 'eye-off'} size={20} />
           </Pressable>
         </View>
 
-        {/* Confirm Password */}
         <View style={styles.input}>
-          <Feather
-            style={fontStyles.secondary_color}
-            name="lock"
-            size={32}
-          />
-
+          <Feather color={colors.primary} name="lock" size={20} />
           <TextInput
-            style={[
-              fontStyles.title,
-              fontStyles.secondary_color,
-              {
-                fontSize: 18,
-                flex: 1
-              }
-            ]}
+            style={[fontStyles.title, styles.text_field]}
             placeholder="Confirm Password"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             secureTextEntry={!showConfirmPassword}
           />
-
-          <Pressable
-            onPress={() =>
-              setShowConfirmPassword(!showConfirmPassword)
-            }
-          >
-            <Feather
-              style={fontStyles.secondary_color}
-              name={showConfirmPassword ? 'eye' : 'eye-off'}
-              size={32}
-            />
+          <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+            <Feather color={colors.primary} name={showConfirmPassword ? 'eye' : 'eye-off'} size={20} />
           </Pressable>
         </View>
-
       </View>
 
-      {/* Register Button */}
       <View style={styles.bottom}>
-
         <Pressable style={styles.register_btn}>
-          <Text style={[
-            fontStyles.title,
-            {
-              fontSize: 24,
-              color: '#fff'
-            }
-          ]}>
+          <Text style={[fontStyles.title, { fontSize: 24, color: colors.white }]}>
             Sign Up
           </Text>
-
-          <Feather
-            color="#fff"
-            name="arrow-right"
-            size={32}
-          />
+          <Feather color={colors.white} name="arrow-right" size={20} />
         </Pressable>
-
-        {/* Login */}
-        <View style={styles.login}>
-          <Text style={[
-            fontStyles.subtitle,
-            fontStyles.secondary_color
-          ]}>
-            Already have an account?
-          </Text>
-
+        <View style={styles.signin}>
+          <Text style={[fontStyles.subtitle, { color: colors.primary }]}>Already have an account? </Text>
           <Pressable onPress={() => router.push("/login")}>
-            <Text style={[
-              fontStyles.subtitle_bold,
-              fontStyles.secondary_color
-            ]}>
+            <Text style={[fontStyles.subtitle_bold, { color: colors.primary }]}>
               Sign In
             </Text>
           </Pressable>
         </View>
-
       </View>
-
     </View>
   )
 }
@@ -225,35 +125,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.bgcolor
   },
-
   form: {
     width: '100%',
     paddingTop: 35,
     flexDirection: 'column',
     gap: 14
   },
-
   input: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
     borderRadius: 50,
-    borderColor: '#999',
+    backgroundColor: colors.white,
     width: '100%',
     paddingHorizontal: 25,
     paddingVertical: 8,
-    gap: 25
+    gap: 14
   },
-
+  text_field: {
+    fontSize: 18,
+    flex: 1,
+    color: colors.primary
+  },
   bottom: {
     width: '100%',
     paddingTop: 35,
     flexDirection: 'column',
     gap: 14
   },
-
   register_btn: {
-    backgroundColor: '#6e8b82',
+    backgroundColor: colors.primary,
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 14,
@@ -261,8 +162,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 50
   },
-
-  login: {
+  signin: {
     flexDirection: 'row',
     justifyContent: 'center'
   }
