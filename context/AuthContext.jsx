@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     return {
       success: false,
-      message: 'Email atau password salah',
+      message: 'Incorrect email or password.',
     }
   }
 

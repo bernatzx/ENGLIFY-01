@@ -28,7 +28,6 @@ const Home = () => {
 
           {/* READY ASKING SECTION */}
           <Text style={[
-            styles.ready_qstn,
             fontStyles.subtitle_bold,
             fontStyles.secondary_color,
             { fontSize: 18, paddingBottom: 15 }
