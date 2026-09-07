@@ -1,8 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { globalStyles } from '../styles/global';
+import { colors, fonts, globalStyles } from '../styles/global';
 import { useRouter } from 'expo-router';
-import { fontStyles } from '../styles/fonts';
 
 const HomeHeader = () => {
   const router = useRouter();
@@ -16,33 +15,20 @@ const HomeHeader = () => {
     <View style={{ flexDirection: 'column' }}>
       <View style={styles.head}>
         <View style={{ flexDirection: 'column', gap: 8 }}>
-          <Text style={[
-            fontStyles.subtitle_bold,
-            fontStyles.secondary_color
-          ]}>{currentDate}</Text>
-          <Text style={[
-            styles.greet,
-            fontStyles.title,
-            fontStyles.primary_color
-          ]}>Good Morning,</Text>
+          <Text style={{ color: colors.PRIMARY_LIGTH, fontFamily: fonts.BOLD }}>
+            {currentDate}
+          </Text>
+          <Text style={styles.greet}>Good Morning,</Text>
         </View>
         <Pressable
           style={[styles.initial, globalStyles.shadow]}
           onPress={() => router.navigate('profile')}
         >
-          <Text style={[
-            fontStyles.subtitle_bold,
-            fontStyles.secondary_color,
-            { fontSize: 16 }
-          ]}>I</Text>
+          <Text style={{ fontSize: 16, fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH }}>I</Text>
         </Pressable>
       </View>
       <View>
-        <Text style={[
-          styles.greet,
-          fontStyles.title,
-          fontStyles.primary_color
-        ]}>Indri</Text>
+        <Text style={styles.greet}>Indri</Text>
       </View>
     </View>
   )
@@ -57,6 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   greet: {
+    color: colors.PRIMARY,
+    fontFamily: fonts.PRIMARY,
     fontSize: 48
   },
   initial: {

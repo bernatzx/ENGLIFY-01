@@ -17,11 +17,9 @@ const RootNavigation = () => {
 
 const RootLayout = () => {
   const [fontsLoaded] = useFonts({
-    PatrickHand: require("../assets/fonts/PatrickHand.ttf"),
-    Quicksand: require("../assets/fonts/Quicksand.ttf"),
-    "Quicksand-Bold": require("../assets/fonts/Quicksand-Bold.ttf"),
-    "Quicksand-Medium": require("../assets/fonts/Quicksand-Medium.ttf"),
-    "Quicksand-SemiBold": require("../assets/fonts/Quicksand-SemiBold.ttf"),
+    CaveatBrush: require("../assets/fonts/CaveatBrush.ttf"),
+    "Kalam-Bold": require("../assets/fonts/Kalam-Bold.ttf"),
+    "Kalam-Regular": require("../assets/fonts/Kalam-Regular.ttf")
   })
 
   if (!fontsLoaded) {

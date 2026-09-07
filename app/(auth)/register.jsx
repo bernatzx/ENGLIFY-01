@@ -7,9 +7,8 @@ import {
   StyleSheet
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import { fontStyles } from '../../styles/fonts'
 import { useRouter } from 'expo-router'
-import { colors } from '../../styles/global'
+import { colors, fonts } from '../../styles/global'
 
 const Register = () => {
   const router = useRouter()
@@ -25,28 +24,19 @@ const Register = () => {
     <View style={styles.container}>
 
       <View>
-        <Text style={[
-          fontStyles.title,
-          {
-            fontSize: 56,
-            color: colors.primary
-          }
-        ]}>
+        <Text style={{ fontSize: 62, color: colors.PRIMARY, fontFamily: fonts.PRIMARY, textAlign: 'center' }}>
           Create Account
         </Text>
-        <Text style={[
-          fontStyles.subtitle_bold,
-          { textAlign: 'center', color: colors.primary }
-        ]}>
+        <Text style={{ textAlign: 'center', color: colors.PRIMARY, fontFamily: fonts.BOLD, fontSize: 18 }}>
           Start your English learning journey
         </Text>
       </View>
 
       <View style={styles.form}>
         <View style={styles.input}>
-          <Feather color={colors.primary} name="user" size={20} />
+          <Feather color={colors.PRIMARY} name="user" size={20} />
           <TextInput
-            style={[fontStyles.title, styles.text_field]}
+            style={styles.text_field}
             placeholder="Full Name"
             value={name}
             onChangeText={setName}
@@ -55,9 +45,9 @@ const Register = () => {
         </View>
 
         <View style={styles.input}>
-          <Feather color={colors.primary} name="mail" size={20} />
+          <Feather color={colors.PRIMARY} name="mail" size={20} />
           <TextInput
-            style={[fontStyles.title, styles.text_field]}
+            style={styles.text_field}
             placeholder="Email"
             value={email}
             onChangeText={setEmail}
@@ -67,45 +57,45 @@ const Register = () => {
         </View>
 
         <View style={styles.input}>
-          <Feather color={colors.primary} name="lock" size={20} />
+          <Feather color={colors.PRIMARY} name="lock" size={20} />
           <TextInput
-            style={[fontStyles.title, styles.text_field]}
+            style={styles.text_field}
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry={!showPassword}
           />
           <Pressable onPress={() => setShowPassword(!showPassword)}>
-            <Feather color={colors.primary} name={showPassword ? 'eye' : 'eye-off'} size={20} />
+            <Feather color={colors.PRIMARY} name={showPassword ? 'eye' : 'eye-off'} size={20} />
           </Pressable>
         </View>
 
         <View style={styles.input}>
-          <Feather color={colors.primary} name="lock" size={20} />
+          <Feather color={colors.PRIMARY} name="lock" size={20} />
           <TextInput
-            style={[fontStyles.title, styles.text_field]}
+            style={styles.text_field}
             placeholder="Confirm Password"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             secureTextEntry={!showConfirmPassword}
           />
           <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-            <Feather color={colors.primary} name={showConfirmPassword ? 'eye' : 'eye-off'} size={20} />
+            <Feather color={colors.PRIMARY} name={showConfirmPassword ? 'eye' : 'eye-off'} size={20} />
           </Pressable>
         </View>
       </View>
 
       <View style={styles.bottom}>
         <Pressable style={styles.register_btn}>
-          <Text style={[fontStyles.title, { fontSize: 24, color: colors.white }]}>
+          <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
             Sign Up
           </Text>
-          <Feather color={colors.white} name="arrow-right" size={20} />
+          <Feather color={colors.WHITE} name="arrow-right" size={20} />
         </Pressable>
         <View style={styles.signin}>
-          <Text style={[fontStyles.subtitle, { color: colors.primary }]}>Already have an account? </Text>
+          <Text style={{ color: colors.PRIMARY, fontFamily: fonts.SECONDARY, fontSize: 16 }}>Already have an account? </Text>
           <Pressable onPress={() => router.push("/login")}>
-            <Text style={[fontStyles.subtitle_bold, { color: colors.primary }]}>
+            <Text style={{ color: colors.PRIMARY, fontFamily: fonts.BOLD, fontSize: 16 }}>
               Sign In
             </Text>
           </Pressable>
@@ -123,7 +113,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.bgcolor
+    backgroundColor: colors.BG
   },
   form: {
     width: '100%',
@@ -135,7 +125,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 50,
-    backgroundColor: colors.white,
+    backgroundColor: colors.WHITE,
     width: '100%',
     paddingHorizontal: 25,
     paddingVertical: 8,
@@ -144,7 +134,8 @@ const styles = StyleSheet.create({
   text_field: {
     fontSize: 18,
     flex: 1,
-    color: colors.primary
+    color: colors.PRIMARY,
+    fontFamily: fonts.PRIMARY
   },
   bottom: {
     width: '100%',
@@ -153,7 +144,7 @@ const styles = StyleSheet.create({
     gap: 14
   },
   register_btn: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.PRIMARY,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -164,6 +155,7 @@ const styles = StyleSheet.create({
   },
   signin: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

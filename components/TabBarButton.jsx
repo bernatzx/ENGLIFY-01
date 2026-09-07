@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#315c50',
     borderRadius: 20,
-    marginTop: 10
+    marginTop: 10,
+    marginHorizontal: 20
   },
   tabbaritem: {
     flex: 1,

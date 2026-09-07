@@ -8,9 +8,8 @@ import {
 } from 'react-native'
 import { useAuth } from '../../context/AuthContext'
 import { Feather } from '@expo/vector-icons'
-import { fontStyles } from '../../styles/fonts'
 import { useRouter } from 'expo-router'
-import { colors } from '../../styles/global'
+import { colors, fonts } from '../../styles/global'
 
 const Login = () => {
   const { login } = useAuth()
@@ -33,28 +32,19 @@ const Login = () => {
     <View style={styles.container}>
 
       <View>
-        <Text style={[
-          fontStyles.title,
-          {
-            fontSize: 56,
-            color: colors.primary
-          }
-        ]}>
+        <Text style={{ fontSize: 62, color: colors.PRIMARY, fontFamily: fonts.PRIMARY, textAlign: 'center' }}>
           Welcome!
         </Text>
-        <Text style={[
-          fontStyles.subtitle_bold,
-          { color: colors.primary }
-        ]}>
+        <Text style={{ color: colors.PRIMARY, fontFamily: fonts.BOLD, textAlign: 'center', fontSize: 18 }}>
           Keep learning, keep growing
         </Text>
       </View>
 
       <View style={{ width: '100%', paddingTop: 35, flexDirection: 'column', gap: 14 }}>
         <View style={styles.input}>
-          <Feather color={colors.primary} name="mail" size={20} />
+          <Feather color={colors.PRIMARY} name="mail" size={20} />
           <TextInput
-            style={[fontStyles.title, { fontSize: 18, flex: 1, color: colors.primary }]}
+            style={{ fontSize: 18, flex: 1, color: colors.PRIMARY, fontFamily: fonts.PRIMARY }}
             placeholder="Email"
             value={email}
             onChangeText={setEmail}
@@ -64,41 +54,41 @@ const Login = () => {
         </View>
 
         <View style={styles.input}>
-          <Feather color={colors.primary} name="lock" size={20} />
+          <Feather color={colors.PRIMARY} name="lock" size={20} />
           <TextInput
-            style={[fontStyles.title, { fontSize: 18, flex: 1, color: colors.primary }]}
+            style={{ fontSize: 18, flex: 1, color: colors.PRIMARY, fontFamily: fonts.PRIMARY }}
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry={!showPassword}
           />
           <Pressable onPress={() => setShowPassword(!showPassword)}>
-            <Feather color={colors.primary} name={showPassword ? 'eye' : 'eye-off'} size={20} />
+            <Feather color={colors.PRIMARY} name={showPassword ? 'eye' : 'eye-off'} size={20} />
           </Pressable>
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <Text style={[fontStyles.title, { fontSize: 18, color: colors.primary }]}>Forgot Password?</Text>
+          <Text style={{ fontSize: 16, color: colors.PRIMARY, fontFamily: fonts.PRIMARY }}>Forgot Password?</Text>
         </View>
       </View>
 
       {error ? (
-        <Text style={[fontStyles.subtitle_bold, { color: colors.primary }]}>
+        <Text style={{ color: colors.PRIMARY, fontFamily: fonts.BOLD }}>
           {error}
         </Text>
       ) : null}
 
       <View style={{ width: '100%', paddingTop: 35, flexDirection: 'column', gap: 14 }}>
         <Pressable onPress={handleLogin} style={styles.login_btn}>
-          <Text style={[fontStyles.title, { fontSize: 24, color: colors.white }]}>
+          <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
             Login
           </Text>
-          <Feather color={colors.white} name="arrow-right" size={20} />
+          <Feather color={colors.WHITE} name="arrow-right" size={20} />
         </Pressable>
         <View style={styles.signup}>
-          <Text style={[fontStyles.subtitle, { color: colors.primary }]}>Don't have an account? </Text>
+          <Text style={{ color: colors.PRIMARY, fontFamily: fonts.SECONDARY, fontSize: 16 }}>Don't have an account? </Text>
           <Pressable onPress={() => router.push('/register')}>
-            <Text style={[fontStyles.subtitle_bold, { color: colors.primary }]}>Sign Up</Text>
+            <Text style={{ color: colors.PRIMARY, fontFamily: fonts.BOLD, fontSize: 16 }}>Sign Up</Text>
           </Pressable>
         </View>
       </View>
@@ -114,20 +104,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.bgcolor
+    backgroundColor: colors.BG
   },
   input: {
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 50,
-    backgroundColor: colors.white,
+    backgroundColor: colors.WHITE,
     width: '100%',
     paddingHorizontal: 25,
     paddingVertical: 8,
     gap: 14
   },
   login_btn: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.PRIMARY,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -138,6 +128,7 @@ const styles = StyleSheet.create({
   },
   signup: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

@@ -2,10 +2,9 @@ import { ScrollView, StyleSheet, Text, View, Pressable } from 'react-native'
 import React from 'react'
 import HomeHeader from '../../components/HomeHeader'
 import LessonsSection from '../../components/LessonsSection'
-import { globalStyles } from '../../styles/global'
+import { colors, fonts, globalStyles } from '../../styles/global'
 import { useRouter } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { fontStyles } from '../../styles/fonts'
 
 const Home = () => {
   const router = useRouter()
@@ -16,7 +15,7 @@ const Home = () => {
 
   return (
     <>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colors.BG, paddingTop: 20, paddingHorizontal: 20 }}>
 
         {/* HOME HEADER UI */}
         <HomeHeader />
@@ -27,21 +26,14 @@ const Home = () => {
           <LessonsSection />
 
           {/* READY ASKING SECTION */}
-          <Text style={[
-            fontStyles.subtitle_bold,
-            fontStyles.secondary_color,
-            { fontSize: 18, paddingBottom: 15 }
-          ]}>
+          <Text style={{ fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH, fontSize: 18, paddingBottom: 15 }}>
             Ready for your daily exam?
           </Text>
           <Pressable onPress={startExam} style={[
             styles.ready_btn,
             globalStyles.shadow
           ]}>
-            <Text style={[
-              fontStyles.title,
-              { fontSize: 36, textAlign: 'center', color: '#eee' }
-            ]}>
+            <Text style={{ fontFamily: fonts.PRIMARY, fontSize: 36, textAlign: 'center', color: '#eee' }}>
               Ready
             </Text>
           </Pressable>

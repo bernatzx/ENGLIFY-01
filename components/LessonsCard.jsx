@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Feather } from '@expo/vector-icons'
-import { globalStyles } from '../styles/global'
-import { fontStyles } from '../styles/fonts'
+import { colors, fonts, globalStyles } from '../styles/global'
 
 const LessonsCard = () => {
   const lessons = [
@@ -54,18 +53,10 @@ const LessonsCard = () => {
               borderRadius: 20
             }} name='arrow-right' size={20} />
           </View>
-          <Text style={[
-            fontStyles.title,
-            fontStyles.primary_color,
-            {
-              fontSize: 26,
-              marginBottom: 5
-            }
-          ]}>{lesson.title}</Text>
-          <Text style={[
-            fontStyles.subtitle,
-            fontStyles.primary_color
-          ]}>{lesson.subtitle}</Text>
+          <Text style={{ fontSize: 26, marginBottom: 5, fontFamily: fonts.PRIMARY, color: colors.PRIMARY }}>
+            {lesson.title}
+          </Text>
+          <Text style={{ color: colors.PRIMARY, fontFamily: fonts.SECONDARY }}>{lesson.subtitle}</Text>
         </View>
       ))}
     </View>

@@ -9,9 +9,9 @@ export const colors = {
 }
 
 export const fonts = {
-  PRIMARY: 'PatrickHand',
-  SECONDARY: 'Quicksand',
-  BOLD: 'Quicksand-Bold'
+  PRIMARY: 'CaveatBrush',
+  SECONDARY: 'Kalam-Regular',
+  BOLD: 'Kalam-Bold'
 }
 
 export const globalStyles = StyleSheet.create({
