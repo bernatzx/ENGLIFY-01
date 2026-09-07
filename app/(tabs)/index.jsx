@@ -33,7 +33,7 @@ const Home = () => {
             styles.ready_btn,
             globalStyles.shadow
           ]}>
-            <Text style={{ fontFamily: fonts.PRIMARY, fontSize: 36, textAlign: 'center', color: '#eee' }}>
+            <Text style={{ fontFamily: fonts.PRIMARY, fontSize: 36, textAlign: 'center', color: colors.WHITE }}>
               Ready
             </Text>
           </Pressable>
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
   ready_btn: {
     padding: 8,
     borderRadius: 50,
-    borderColor: '#f7cace',
+    borderColor: colors.PRIMARY_LIGTH,
     marginHorizontal: 50,
-    borderWidth: 2,
-    backgroundColor: '#f2d1d4'
+    borderWidth: 1,
+    backgroundColor: colors.PRIMARY
   }
 })

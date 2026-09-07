@@ -9,18 +9,18 @@ const LessonsCard = () => {
       id: 1,
       title: 'Grammar',
       subtitle: 'Learn how sentences work.',
-      primarybgcolor: '#f8d8ca',
-      iconcolor: '#b55c49',
-      bordercolor: '#efd0c3',
+      primarybgcolor: '#f3c3b2',
+      iconcolor: '#e78967',
+      bordercolor: '#f7c1ae',
       icon: 'edit-3'
     },
     {
       id: 2,
       title: 'Vocabulary',
       subtitle: 'Build your vocabulary.',
-      primarybgcolor: '#d9e2ea',
+      primarybgcolor: '#99cdd8',
       iconcolor: '#4996b5',
-      bordercolor: '#d2dbe2',
+      bordercolor: '#94d0dc',
       icon: 'book-open'
     }
   ]
@@ -41,13 +41,13 @@ const LessonsCard = () => {
         >
           <View style={styles.cardheader}>
             <Feather style={{
-              backgroundColor: '#f5f1dc',
-              color: lesson.iconcolor,
+              color: colors.WHITE,
+              backgroundColor: lesson.iconcolor,
               padding: 12,
               borderRadius: 14
             }} name={lesson.icon} size={20} />
             <Feather style={{
-              backgroundColor: '#f5f1dc',
+              backgroundColor: colors.WHITE,
               color: lesson.iconcolor,
               padding: 6,
               borderRadius: 20

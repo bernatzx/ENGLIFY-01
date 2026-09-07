@@ -9,7 +9,7 @@ const LessonsSection = () => {
   return (
     <View style={{ paddingBottom: 35 }}>
       <View style={styles.title}>
-        <Text style={{ fontFamily: fonts.BOLD, color: colors.SECONDARY, fontSize: 18 }}>
+        <Text style={{ fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH, fontSize: 18 }}>
           Let's improve your english skill
         </Text>
       </View>

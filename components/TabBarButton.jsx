@@ -2,14 +2,14 @@ import { View, Platform, StyleSheet } from 'react-native';
 import { useLinkBuilder } from '@react-navigation/native';
 import { Text, PlatformPressable } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { globalStyles } from '../styles/global';
+import { AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors, fonts, globalStyles } from '../styles/global';
 
 export function TabBarButton({ state, descriptors, navigation }) {
   const { buildHref } = useLinkBuilder();
   const icons = {
-    index: (props) => <Feather name='home' size={20} {...props} />,
-    history: (props) => <MaterialCommunityIcons name='bookshelf' size={20} {...props} />,
+    index: (props) => <AntDesign name='home' size={20} {...props} />,
+    history: (props) => <MaterialCommunityIcons name='clock-outline' size={20} {...props} />,
     quiz: (props) => <MaterialCommunityIcons name='clipboard-check-outline' size={20} {...props} />,
     profile: (props) => <Feather name='user' size={20} {...props} />
   }
@@ -60,15 +60,15 @@ export function TabBarButton({ state, descriptors, navigation }) {
             onLongPress={onLongPress}
             style={[
               styles.tabbaritem,
-              { backgroundColor: isFocused ? '#f3e9cd' : 'transparent' }
+              { backgroundColor: isFocused ? colors.SECONDARY : 'transparent' }
             ]}
           >
             {
               icons[route.name]({
-                color: isFocused ? '#315c50' : '#f3e9cd'
+                color: isFocused ? colors.PRIMARY : colors.SECONDARY
               })
             }
-            <Text style={{ color: isFocused ? '#315c50' : '#f3e9cd', fontSize: 12 }}>
+            <Text style={{ color: isFocused ? colors.PRIMARY : colors.SECONDARY, fontSize: 12, fontFamily: fonts.BOLD }}>
               {label}
             </Text>
           </PlatformPressable>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    backgroundColor: '#315c50',
+    backgroundColor: colors.PRIMARY,
     borderRadius: 20,
     marginTop: 10,
     marginHorizontal: 20
