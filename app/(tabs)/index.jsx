@@ -8,9 +8,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Home = () => {
   const router = useRouter()
-  const startExam = async () => {
-    await AsyncStorage.setItem('exam_active', 'true')
-    router.push('/exam')
+  const startPractice = async () => {
+    await AsyncStorage.setItem('practice_active', 'true')
+    router.push('/practice')
   }
 
   return (
@@ -27,9 +27,9 @@ const Home = () => {
 
           {/* READY ASKING SECTION */}
           <Text style={{ fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH, fontSize: 18, paddingBottom: 15 }}>
-            Ready for your daily exam?
+            Ready for your daily practice?
           </Text>
-          <Pressable onPress={startExam} style={[
+          <Pressable onPress={startPractice} style={[
             styles.ready_btn,
             globalStyles.shadow
           ]}>
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
   ready_btn: {
     padding: 8,
     borderRadius: 50,
-    borderColor: colors.PRIMARY_LIGTH,
+    borderColor: colors.PRIMARY,
     marginHorizontal: 50,
     borderWidth: 1,
-    backgroundColor: colors.PRIMARY
+    backgroundColor: colors.PRIMARY_LIGTH
   }
 })

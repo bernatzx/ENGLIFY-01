@@ -32,7 +32,7 @@ const RootLayout = () => {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name='(auth)' />
           <Stack.Screen name='(tabs)' />
-          <Stack.Screen name="exam" options={{ gestureEnabled: false }} />
+          <Stack.Screen name="practice" options={{ gestureEnabled: false }} />
         </Stack>
         <RootNavigation />
       </AuthProvider>
