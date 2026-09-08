@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRouter } from 'expo-router'
 import { Feather } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../../styles/global'
+import AiCorrection from '../../components/AiCorrection'
 
 const Practice = () => {
   const router = useRouter()
@@ -107,6 +108,10 @@ const Practice = () => {
             <Text style={{ fontFamily: fonts.PRIMARY, color: colors.WHITE, fontSize: 28 }}>Submit →</Text>
           </Pressable>
         </View>
+        {/* END */}
+
+        {/* AI CORRECTION */}
+        <AiCorrection />
         {/* END */}
 
       </ScrollView>

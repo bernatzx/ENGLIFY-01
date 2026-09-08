@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     borderColor: colors.PRIMARY,
     marginHorizontal: 50,
     borderWidth: 1,
-    backgroundColor: colors.PRIMARY_LIGTH
+    backgroundColor: colors.PRIMARY
   }
 })
