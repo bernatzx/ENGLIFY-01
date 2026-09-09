@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../../styles/global'
 import AiCorrection from '../../components/AiCorrection'
 import { useAuth } from '../../context/AuthContext'
-import { getDailyPractice } from '../../services/practice'
+import { getDailyPractice, correctPractice } from '../../services/practice'
 
 const Practice = () => {
   const router = useRouter()
@@ -15,6 +15,8 @@ const Practice = () => {
   const [answer, setAnswer] = useState('')
   const [finish, setFinish] = useState(false);
   const [correction, setCorrection] = useState(null);
+  const [correctionLoading, setCorrectionLoading] = useState(false)
+  const [correctionError, setCorrectionError] = useState(null)
 
   const [practice, setPractice] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -64,9 +66,31 @@ const Practice = () => {
     router.replace('/(tabs)')
   }
 
-  const submitAnswer = () => {
-    if (answer != '') {
+  const submitAnswer = async () => {
+    if (!answer.trim() || !token || !practice) {
+      return
+    }
+
+    try {
+      setCorrectionLoading(true)
+      setCorrectionError(null)
+
+      const data = await correctPractice(token, {
+        answer: answer.trim(),
+        instruction: practice.instruction,
+        grammar: practice.grammar,
+        vocabulary: practice.vocabulary,
+      })
+
+      setCorrection(data)
       setFinish(true)
+
+    } catch (error) {
+      console.error('Failed to correct practice:', error)
+      setCorrectionError(error.message)
+
+    } finally {
+      setCorrectionLoading(false)
     }
   }
 
@@ -174,20 +198,50 @@ const Practice = () => {
 
         {/* SUBMIT BUTTON */}
         <View style={{ alignItems: 'flex-end' }}>
-          {!finish
-            ?
-            <Pressable style={[globalStyles.shadow, styles.submitButton]} onPress={submitAnswer}>
-              <Text style={{ fontFamily: fonts.PRIMARY, color: colors.WHITE, fontSize: 28 }}>Submit →</Text>
+          {!finish ? (
+            <Pressable
+              style={[
+                globalStyles.shadow,
+                styles.submitButton,
+                correctionLoading && { opacity: 0.7 }
+              ]}
+              onPress={submitAnswer}
+              disabled={correctionLoading}
+            >
+              {correctionLoading ? (
+                <ActivityIndicator
+                  size="small"
+                  color={colors.WHITE}
+                />
+              ) : (
+                <Text
+                  style={{
+                    fontFamily: fonts.PRIMARY,
+                    color: colors.WHITE,
+                    fontSize: 28
+                  }}
+                >
+                  Submit →
+                </Text>
+              )}
             </Pressable>
-            :
-            <Pressable onPress={finishPractice}><Text>Kembali</Text></Pressable>
-          }
+          ) : (
+            <Pressable onPress={finishPractice}>
+              <Text>Kembali</Text>
+            </Pressable>
+          )}
         </View>
         {/* END */}
 
         {/* AI CORRECTION */}
-        {finish && <AiCorrection />}
+        {finish && correction && <AiCorrection result={correction} />}
         {/* END */}
+
+        {correctionError && (
+          <Text style={styles.errorText}>
+            {correctionError}
+          </Text>
+        )}
 
       </ScrollView>
     </View>
@@ -253,6 +307,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.BOLD,
     height: 100,
     textAlignVertical: 'top'
+  },
+  errorText: {
+    color: 'red',
+    fontFamily: fonts.SECONDARY,
+    marginTop: 15,
   },
   characterCount: {
     fontFamily: fonts.SECONDARY,

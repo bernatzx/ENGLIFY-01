@@ -3,15 +3,9 @@ import React, { Component } from 'react'
 import { colors, fonts, globalStyles } from '../styles/global'
 import { Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 
-const AiCorrection = () => {
-  const dummyCorrection = {
-    is_correct: false,
-    corrected_answer: 'I went to a pretty car BBQ yesterday.',
-    explanation: [
-      "The sentence is in simple past tense (went, not go).",
-      "The words 'pretty', 'car', and 'BBQ' are used correctly.",
-      "The sentence is grammatically correct and natural."
-    ]
+const AiCorrection = ({ result }) => {
+  if (!result) {
+    return null
   }
   return (
     <View style={[styles.container, globalStyles.shadow]}>
@@ -33,7 +27,7 @@ const AiCorrection = () => {
           <Text style={styles.textH2}>Correct Answer</Text>
         </View>
         <View style={[globalStyles.shadow, styles.correctAnswer]}>
-          <Text style={styles.textMedium}>{dummyCorrection.corrected_answer}</Text>
+          <Text style={styles.textMedium}>{result.corrected_answer}</Text>
         </View>
         <View style={styles.explanation}>
           <View>
@@ -41,7 +35,7 @@ const AiCorrection = () => {
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.textH2}>Explanation</Text>
-            {dummyCorrection.explanation.map((exp, i) => (
+            {result.explanation.map((exp, i) => (
               <Text style={styles.expText} key={i}>• {exp}</Text>
             ))}
           </View>
