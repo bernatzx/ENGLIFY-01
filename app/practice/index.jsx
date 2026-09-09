@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Pressable, StyleSheet, BackHandler, ScrollView, TextInput } from 'react-native'
+import { View, Text, Pressable, StyleSheet, BackHandler, ScrollView, TextInput, ActivityIndicator } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRouter } from 'expo-router'
 import { Feather } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../../styles/global'
 import AiCorrection from '../../components/AiCorrection'
+import { useAuth } from '../../context/AuthContext'
+import { getDailyPractice } from '../../services/practice'
 
 const Practice = () => {
   const router = useRouter()
+  const { token, loading: authLoading } = useAuth()
 
   const [answer, setAnswer] = useState('')
   const [finish, setFinish] = useState(false);
   const [correction, setCorrection] = useState(null);
+
+  const [practice, setPractice] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const backAction = () => {
@@ -25,6 +32,33 @@ const Practice = () => {
     return () => backHandler.remove()
   }, [])
 
+  useEffect(() => {
+    if (!authLoading) {
+      loadDailyPractice();
+    }
+  }, [token, authLoading])
+
+  const loadDailyPractice = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      if (!token) {
+        router.replace("/login");
+        return;
+      }
+
+      const data = await getDailyPractice(token);
+      setPractice(data);
+
+    } catch (error) {
+      console.error("Failed to load practice:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const finishPractice = async () => {
     await AsyncStorage.removeItem('exam_active')
     router.replace('/(tabs)')
@@ -36,14 +70,38 @@ const Practice = () => {
     }
   }
 
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.PRIMARY} />
+        <Text style={styles.loadingText}> Loading practice... </Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.errorText}> {error} </Text>
+        <Pressable style={[globalStyles.shadow, styles.submitButton]} onPress={loadDailyPractice} >
+          <Text style={{ fontFamily: fonts.PRIMARY, color: colors.WHITE, fontSize: 28, }} > Try Again </Text>
+        </Pressable>
+      </View>
+    );
+  }
+
+  if (!practice) {
+    return null;
+  }
+
   const practices = [
     {
       type: "use grammar",
-      value: ["simple past tense"],
+      value: practice.grammar,
     },
     {
       type: "use vocab",
-      value: ["car", "pretty", "bbq"],
+      value: practice.vocabulary,
     },
   ];
 
@@ -62,7 +120,7 @@ const Practice = () => {
               fontFamily: fonts.PRIMARY,
               color: colors.PRIMARY,
               fontSize: 28
-            }}>Make a sentence</Text>
+            }}>{practice.instruction}</Text>
             <Text style={{
               fontFamily: fonts.SECONDARY,
               color: colors.PRIMARY_LIGTH
@@ -79,7 +137,7 @@ const Practice = () => {
                   <Text style={styles.pointsText}> → </Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                  {item.value.map((value, subIndex) => (
+                  {(item.value || []).map((value, subIndex) => (
                     <Text style={styles.pointsText} key={subIndex}>
                       {value}
                     </Text>
@@ -128,7 +186,7 @@ const Practice = () => {
         {/* END */}
 
         {/* AI CORRECTION */}
-        {finish ? <AiCorrection /> : ''}
+        {finish && <AiCorrection />}
         {/* END */}
 
       </ScrollView>
