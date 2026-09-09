@@ -6,7 +6,10 @@ export const colors = {
   PRIMARY_LIGTH: '#6e8b82',
   SECONDARY: '#cfd6c4',
   SECONDARY_LIGHT: '#dce0d6',
-  WHITE: '#f8ede3'
+  WHITE: '#f8ede3',
+  RED: '#f08080',
+  LIGHT_RED: '#f1c4c4',
+  BLUE: '#acd5dd'
 }
 
 export const fonts = {
