@@ -20,16 +20,34 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
     setError('')
-    if (!emailRegex.test(email)) {
+    const cleanEmail = email.trim().toLowerCase()
+    if (!cleanEmail) {
+      setError('please enter your email')
+      return
+    }
+    if (!emailRegex.test(cleanEmail)) {
       setError("please enter a valid email address")
       return
     }
-    const result = await login(email, password)
-    if (!result.success) {
-      setError(result.message)
+    if (!password) {
+      setError('please enter your password')
+      return
+    }
+    setLoading(true)
+    try {
+      const result = await login(cleanEmail, password)
+      if (!result.success) {
+        setError(result.message)
+        return
+      }
+    } catch (error) {
+      setError('something went wrong. please try again')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -72,7 +90,7 @@ const Login = () => {
           </Pressable>
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 14 }}>
           <Text style={{ fontSize: 16, color: colors.PRIMARY, fontFamily: fonts.PRIMARY }}>Forgot Password?</Text>
         </View>
       </View>
@@ -84,7 +102,7 @@ const Login = () => {
       ) : null}
 
       <View style={{ width: '100%', flexDirection: 'column', gap: 14 }}>
-        <Pressable onPress={handleLogin} style={styles.login_btn}>
+        <Pressable onPress={handleLogin} disabled={loading} style={styles.login_btn}>
           <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
             Login
           </Text>
@@ -128,7 +146,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontFamily: fonts.BOLD,
     backgroundColor: '#f08080',
-    marginVertical: 14,
+    marginBottom: 14,
     padding: 8
   },
   login_btn: {

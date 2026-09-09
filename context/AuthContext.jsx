@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import * as SecureStore from 'expo-secure-store'
-import { login as loginService, getMe } from '../services/auth'
+import { login as loginService, register as registerService, getMe } from '../services/auth'
 
 const AuthContext = createContext()
 
@@ -56,6 +56,11 @@ export const AuthProvider = ({ children }) => {
     return result
   }
 
+  const register = async (name, email, password) => {
+    const result = await registerService(name, email, password)
+    return result
+  }
+
   const logout = async () => {
     await SecureStore.deleteItemAsync('access_token')
     setUser(null)
@@ -67,7 +72,9 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         token,
+        loading,
         login,
+        register,
         logout,
       }}
     >

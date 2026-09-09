@@ -9,16 +9,64 @@ import {
 import { Feather } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { colors, fonts } from '../../styles/global'
+import { useAuth } from '../../context/AuthContext'
 
 const Register = () => {
   const router = useRouter()
+  const { register } = useAuth()
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  const handleRegister = async () => {
+    setError('')
+    const cleanName = name.trim()
+    const cleanEmail = email.trim().toLowerCase()
+    if (!cleanName) {
+      setError('please enter your full name')
+      return
+    }
+    if (!emailRegex.test(cleanEmail)) {
+      setError('please enter a valid email address')
+      return
+    }
+    if (!password) {
+      setError('please enter your password')
+      return
+    }
+    if (password.length < 8) {
+      setError('password must be at least 8 characters')
+      return
+    }
+    if (password !== confirmPassword) {
+      setError('passwords do not match')
+      return
+    }
+    setLoading(true)
+    try {
+      const result = await register(cleanName, cleanEmail, password)
+      if (!result.success) {
+        setError(result.message)
+        return
+      } 
+      router.replace({
+        pathname: '/verify-email',
+        params: { email: cleanEmail }
+      })
+    } catch (error) {
+      setError('something went wrong. please try again')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -85,10 +133,16 @@ const Register = () => {
         </View>
       </View>
 
+      {error ? (
+        <Text style={styles.errorMsg}>
+          {error}
+        </Text>
+      ) : null}
+
       <View style={styles.bottom}>
-        <Pressable style={styles.register_btn}>
+        <Pressable style={styles.register_btn} disabled={loading} onPress={handleRegister}>
           <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
-            Sign Up
+            Register
           </Text>
           <Feather color={colors.WHITE} name="arrow-right" size={20} />
         </Pressable>
@@ -119,6 +173,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: 35,
     flexDirection: 'column',
+    marginBottom: 14,
     gap: 14
   },
   input: {
@@ -137,9 +192,18 @@ const styles = StyleSheet.create({
     color: colors.PRIMARY,
     fontFamily: fonts.PRIMARY
   },
+  errorMsg: {
+    color: colors.WHITE,
+    width: '100%',
+    borderRadius: 14,
+    textTransform: 'capitalize',
+    fontFamily: fonts.BOLD,
+    backgroundColor: '#f08080',
+    marginBottom: 14,
+    padding: 8
+  },
   bottom: {
     width: '100%',
-    paddingTop: 35,
     flexDirection: 'column',
     gap: 14
   },
