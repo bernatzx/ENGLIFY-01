@@ -2,9 +2,20 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors, fonts, globalStyles } from '../styles/global';
 import { useRouter } from 'expo-router';
+import { useAuth } from '../context/AuthContext';
 
 const HomeHeader = () => {
+  const { user } = useAuth()
   const router = useRouter();
+  const hour = new Date().getHours()
+
+  const greeting =
+    hour < 12 ? 'Good Morning,' :
+      hour < 18 ? 'Good Afternoon,' :
+        'Good Evening,'
+
+  const firstName = user?.name?.split(' ')[0] || ''
+  const initial = firstName.charAt(0).toUpperCase()
   const currentDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
@@ -18,17 +29,17 @@ const HomeHeader = () => {
           <Text style={{ color: colors.PRIMARY_LIGTH, fontFamily: fonts.BOLD }}>
             {currentDate}
           </Text>
-          <Text style={styles.greet}>Good Morning,</Text>
+          <Text style={styles.greet}>{greeting}</Text>
         </View>
         <Pressable
           style={[styles.initial, globalStyles.shadow]}
           onPress={() => router.navigate('profile')}
         >
-          <Text style={{ fontSize: 16, fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH }}>I</Text>
+          <Text style={{ fontSize: 16, fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH }}>{initial}</Text>
         </Pressable>
       </View>
       <View>
-        <Text style={styles.greet}>Indri</Text>
+        <Text style={styles.greet}>{firstName}</Text>
       </View>
     </View>
   )

@@ -10,6 +10,8 @@ const Practice = () => {
   const router = useRouter()
 
   const [answer, setAnswer] = useState('')
+  const [finish, setFinish] = useState(false);
+  const [correction, setCorrection] = useState(null);
 
   useEffect(() => {
     const backAction = () => {
@@ -26,6 +28,12 @@ const Practice = () => {
   const finishPractice = async () => {
     await AsyncStorage.removeItem('exam_active')
     router.replace('/(tabs)')
+  }
+
+  const submitAnswer = () => {
+    if (answer != '') {
+      setFinish(true)
+    }
   }
 
   const practices = [
@@ -86,7 +94,10 @@ const Practice = () => {
         {/* ANSWER TEXT FIELD */}
         <View style={styles.answer}>
           <TextInput
-            style={styles.answerField}
+            style={[
+              styles.answerField,
+              finish && { opacity: 0.8 }
+            ]}
             placeholderTextColor={colors.PRIMARY_LIGTH}
             placeholder="Type your answer here..."
             value={answer}
@@ -95,6 +106,7 @@ const Practice = () => {
             autoCapitalize="none"
             multiline
             maxLength={200}
+            editable={!finish}
           />
           <Text style={styles.characterCount}>
             {answer.length}/200
@@ -104,14 +116,19 @@ const Practice = () => {
 
         {/* SUBMIT BUTTON */}
         <View style={{ alignItems: 'flex-end' }}>
-          <Pressable style={[globalStyles.shadow, styles.submitButton]} onPress={finishPractice}>
-            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.WHITE, fontSize: 28 }}>Submit →</Text>
-          </Pressable>
+          {!finish
+            ?
+            <Pressable style={[globalStyles.shadow, styles.submitButton]} onPress={submitAnswer}>
+              <Text style={{ fontFamily: fonts.PRIMARY, color: colors.WHITE, fontSize: 28 }}>Submit →</Text>
+            </Pressable>
+            :
+            <Pressable onPress={finishPractice}><Text>Kembali</Text></Pressable>
+          }
         </View>
         {/* END */}
 
         {/* AI CORRECTION */}
-        <AiCorrection />
+        {finish ? <AiCorrection /> : ''}
         {/* END */}
 
       </ScrollView>

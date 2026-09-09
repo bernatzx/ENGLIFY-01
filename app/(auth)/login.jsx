@@ -14,6 +14,7 @@ import { colors, fonts } from '../../styles/global'
 const Login = () => {
   const { login } = useAuth()
   const router = useRouter()
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -22,6 +23,10 @@ const Login = () => {
 
   const handleLogin = async () => {
     setError('')
+    if (!emailRegex.test(email)) {
+      setError("please enter a valid email address")
+      return
+    }
     const result = await login(email, password)
     if (!result.success) {
       setError(result.message)
@@ -73,12 +78,12 @@ const Login = () => {
       </View>
 
       {error ? (
-        <Text style={{ color: colors.PRIMARY, fontFamily: fonts.BOLD }}>
+        <Text style={styles.errorMsg}>
           {error}
         </Text>
       ) : null}
 
-      <View style={{ width: '100%', paddingTop: 35, flexDirection: 'column', gap: 14 }}>
+      <View style={{ width: '100%', flexDirection: 'column', gap: 14 }}>
         <Pressable onPress={handleLogin} style={styles.login_btn}>
           <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
             Login
@@ -115,6 +120,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 8,
     gap: 14
+  },
+  errorMsg: {
+    color: colors.WHITE,
+    width: '100%',
+    borderRadius: 14,
+    textTransform: 'capitalize',
+    fontFamily: fonts.BOLD,
+    backgroundColor: '#f08080',
+    marginVertical: 14,
+    padding: 8
   },
   login_btn: {
     backgroundColor: colors.PRIMARY,

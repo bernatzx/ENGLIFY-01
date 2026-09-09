@@ -2,39 +2,64 @@ import React from 'react'
 import { Redirect, Stack } from 'expo-router'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { AuthProvider, useAuth } from '../context/AuthContext'
 
-const RootNavigation = () => {
-  const { user } = useAuth()
+const AppStack = () => {
+  const { user, loading } = useAuth()
 
-  if (!user) {
-    return <Redirect href="/(auth)/login" />
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </View>
+    )
   }
 
-  return <Redirect href="/(tabs)" />
+  return (
+    <>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Protected guard={!user}>
+          <Stack.Screen name="(auth)" />
+        </Stack.Protected>
+
+        <Stack.Protected guard={!!user}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="practice"
+            options={{ gestureEnabled: false }}
+          />
+        </Stack.Protected>
+      </Stack>
+
+      {user ? (
+        <Redirect href="/(tabs)" />
+      ) : (
+        <Redirect href="/(auth)/login" />
+      )}
+    </>
+  )
 }
 
 const RootLayout = () => {
   const [fontsLoaded] = useFonts({
-    CaveatBrush: require("../assets/fonts/CaveatBrush.ttf"),
-    "Kalam-Bold": require("../assets/fonts/Kalam-Bold.ttf"),
-    "Kalam-Regular": require("../assets/fonts/Kalam-Regular.ttf")
+    CaveatBrush: require('../assets/fonts/CaveatBrush.ttf'),
+    'Kalam-Bold': require('../assets/fonts/Kalam-Bold.ttf'),
+    'Kalam-Regular': require('../assets/fonts/Kalam-Regular.ttf'),
   })
 
   if (!fontsLoaded) {
-    return <View />
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </View>
+    )
   }
 
   return (
     <SafeAreaProvider>
       <AuthProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='(auth)' />
-          <Stack.Screen name='(tabs)' />
-          <Stack.Screen name="practice" options={{ gestureEnabled: false }} />
-        </Stack>
-        <RootNavigation />
+        <AppStack />
       </AuthProvider>
     </SafeAreaProvider>
   )
