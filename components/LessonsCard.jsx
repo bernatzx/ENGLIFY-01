@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../styles/global'
+import { useRouter } from 'expo-router'
 
 const LessonsCard = () => {
+  const router = useRouter()
+
   const lessons = [
     {
       id: 1,
@@ -12,7 +15,8 @@ const LessonsCard = () => {
       primarybgcolor: '#f3c3b2',
       iconcolor: '#e78967',
       bordercolor: '#f7c1ae',
-      icon: 'edit-3'
+      icon: 'edit-3',
+      route: '/lessons/grammar'
     },
     {
       id: 2,
@@ -21,7 +25,8 @@ const LessonsCard = () => {
       primarybgcolor: '#99cdd8',
       iconcolor: '#4996b5',
       bordercolor: '#94d0dc',
-      icon: 'book-open'
+      icon: 'book-open',
+      route: '/lessons/vocabulary'
     }
   ]
   return (
@@ -46,12 +51,14 @@ const LessonsCard = () => {
               padding: 12,
               borderRadius: 14
             }} name={lesson.icon} size={20} />
-            <Feather style={{
-              backgroundColor: colors.WHITE,
-              color: lesson.iconcolor,
-              padding: 6,
-              borderRadius: 20
-            }} name='arrow-right' size={20} />
+            <Pressable onPress={() => router.push(lesson.route)}>
+              <Feather style={{
+                backgroundColor: colors.WHITE,
+                color: lesson.iconcolor,
+                padding: 6,
+                borderRadius: 20
+              }} name='arrow-right' size={20} />
+            </Pressable>
           </View>
           <Text style={{ fontSize: 26, marginBottom: 5, fontFamily: fonts.PRIMARY, color: colors.PRIMARY }}>
             {lesson.title}

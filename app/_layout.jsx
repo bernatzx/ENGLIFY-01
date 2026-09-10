@@ -25,6 +25,7 @@ const AppStack = () => {
 
         <Stack.Protected guard={!!user}>
           <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="lessons" />
           <Stack.Screen
             name="practice"
             options={{ gestureEnabled: false }}
