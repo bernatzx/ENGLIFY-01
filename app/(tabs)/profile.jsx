@@ -9,87 +9,89 @@ const Profile = () => {
 
 
   return (
-    <View style={styles.container}>
-      {/* HEAD */}
-      <View style={styles.head}>
-        <Text style={{
-          fontFamily: fonts.PRIMARY,
-          color: colors.PRIMARY,
-          fontSize: 52
-        }}>My Profile</Text>
-        <Text style={{
-          fontFamily: fonts.SECONDARY,
-          color: colors.PRIMARY_LIGTH,
-          fontSize: 24
-        }}>Better version of you</Text>
-      </View>
-
-      {/* BODY */}
-      <View style={[globalStyles.shadow, styles.firstBody]}>
-        <Feather style={styles.userImg} name='user' size={62} />
-        <View>
+    <>
+      <View style={styles.container}>
+        {/* HEAD */}
+        <View style={styles.head}>
           <Text style={{
             fontFamily: fonts.PRIMARY,
             color: colors.PRIMARY,
-            fontSize: 26
-          }}>{user?.name}</Text>
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 7
-          }}>
-            <Feather color={colors.PRIMARY_LIGTH} name='mail' size={16} />
+            fontSize: 52
+          }}>My Profile</Text>
+          <Text style={{
+            fontFamily: fonts.SECONDARY,
+            color: colors.PRIMARY_LIGTH,
+            fontSize: 24
+          }}>Better version of you</Text>
+        </View>
+
+        {/* BODY */}
+        <View style={[globalStyles.shadow, styles.firstBody]}>
+          <Feather style={styles.userImg} name='user' size={62} />
+          <View>
             <Text style={{
-              fontFamily: fonts.SECONDARY,
-              color: colors.PRIMARY_LIGTH,
-              fontSize: 16
-            }}>{user?.email}</Text>
+              fontFamily: fonts.PRIMARY,
+              color: colors.PRIMARY,
+              fontSize: 26
+            }}>{user?.name}</Text>
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 7
+            }}>
+              <Feather color={colors.PRIMARY_LIGTH} name='mail' size={16} />
+              <Text style={{
+                fontFamily: fonts.SECONDARY,
+                color: colors.PRIMARY_LIGTH,
+                fontSize: 16
+              }}>{user?.email}</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={[globalStyles.shadow, styles.secondBody]}>
-        <View style={{
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-          <Feather color={colors.PRIMARY} name='book-open' size={28} />
-          <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>11</Text>
-          <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>Practice</Text>
+        <View style={[globalStyles.shadow, styles.secondBody]}>
+          <View style={{
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+            <Feather color={colors.PRIMARY} name='book-open' size={28} />
+            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>11</Text>
+            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>Practice</Text>
+          </View>
+          <View style={styles.divider}></View>
+          <View style={{
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+            <Feather color={colors.PRIMARY} name='target' size={28} />
+            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>11</Text>
+            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>Avg. Score</Text>
+          </View>
         </View>
-        <View style={styles.divider}></View>
-        <View style={{
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-          <Feather color={colors.PRIMARY} name='target' size={28} />
-          <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>11</Text>
-          <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>Avg. Score</Text>
-        </View>
-      </View>
 
-      {/* FOOT */}
-      <Pressable style={styles.foot} onPress={logout}>
-        <View style={{
-          flexDirection: 'row',
-          gap: 14,
-          alignItems: 'center'
-        }}>
-          <MaterialIcons style={{
-            backgroundColor: colors.RED,
-            borderRadius: 20,
-            padding: 4,
-            color: colors.WHITE
-          }} name='exit-to-app' size={20} />
-          <Text style={{
-            fontFamily: fonts.BOLD,
-            color: colors.PRIMARY,
-            fontSize: 18
-          }}>Log Out</Text>
-        </View>
-        <AntDesign color={colors.PRIMARY} name='right' size={18} />
-      </Pressable>
-    </View >
+        {/* FOOT */}
+        <Pressable style={styles.foot} onPress={logout}>
+          <View style={{
+            flexDirection: 'row',
+            gap: 14,
+            alignItems: 'center'
+          }}>
+            <MaterialIcons style={{
+              backgroundColor: colors.RED,
+              borderRadius: 20,
+              padding: 4,
+              color: colors.WHITE
+            }} name='exit-to-app' size={20} />
+            <Text style={{
+              fontFamily: fonts.BOLD,
+              color: colors.PRIMARY,
+              fontSize: 18
+            }}>Log Out</Text>
+          </View>
+          <AntDesign color={colors.PRIMARY} name='right' size={18} />
+        </Pressable>
+      </View >
+    </>
   )
 }
 
