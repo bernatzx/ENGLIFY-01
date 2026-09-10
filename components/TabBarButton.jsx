@@ -64,7 +64,7 @@ export function TabBarButton({ state, descriptors, navigation }) {
             ]}
           >
             {
-              icons[route.name]({
+              icons[route.name]?.({
                 color: isFocused ? colors.PRIMARY : colors.SECONDARY
               })
             }

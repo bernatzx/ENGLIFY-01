@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../../styles/global'
 import AiCorrection from '../../components/AiCorrection'
 import { useAuth } from '../../context/AuthContext'
-import { getDailyPractice, correctPractice } from '../../services/practice'
+import { getDailyPractice, correctPractice, savePracticeHistory } from '../../services/practice'
 
 const Practice = () => {
   const router = useRouter()
@@ -80,6 +80,14 @@ const Practice = () => {
         instruction: practice.instruction,
         grammar: practice.grammar,
         vocabulary: practice.vocabulary,
+      })
+
+      await savePracticeHistory(token, {
+        practice_id: practice.id,
+        answer: answer.trim(),
+        corrected_answer: data.corrected_answer,
+        score: data.score,
+        explanation: data.explanation,
       })
 
       setCorrection(data)

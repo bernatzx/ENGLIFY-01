@@ -1,13 +1,37 @@
-import { ScrollView, StyleSheet, Text, View, Pressable } from 'react-native'
-import React from 'react'
+import { ScrollView, StyleSheet, Text, View, Pressable, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import HomeHeader from '../../components/HomeHeader'
 import LessonsSection from '../../components/LessonsSection'
 import { colors, fonts, globalStyles } from '../../styles/global'
 import { useRouter } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useAuth } from '../../context/AuthContext'
+import { getTodayPracticeStatus } from '../../services/practice'
 
 const Home = () => {
   const router = useRouter()
+  const { token } = useAuth()
+
+  const [practiceCompleted, setPracticeCompleted] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        const status = await getTodayPracticeStatus(token)
+        setPracticeCompleted(status.completed)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (token) {
+      checkStatus()
+    }
+  }, [token])
+
   const startPractice = async () => {
     await AsyncStorage.setItem('practice_active', 'true')
     router.push('/practice')
@@ -26,17 +50,26 @@ const Home = () => {
           <LessonsSection />
 
           {/* READY ASKING SECTION */}
-          <Text style={{ fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH, fontSize: 18, paddingBottom: 15 }}>
-            Ready for your daily practice?
-          </Text>
-          <Pressable onPress={startPractice} style={[
-            styles.ready_btn,
-            globalStyles.shadow
-          ]}>
-            <Text style={{ fontFamily: fonts.PRIMARY, fontSize: 36, textAlign: 'center', color: colors.WHITE }}>
-              Ready
-            </Text>
-          </Pressable>
+          {loading ? (
+            <ActivityIndicator size="small" color={colors.WHITE} />
+          ) : (
+            <>
+              <Text style={{ fontFamily: fonts.BOLD, color: colors.PRIMARY_LIGTH, fontSize: 18, paddingBottom: 15 }}>
+                {practiceCompleted
+                  ? "You already finished today's practice"
+                  : 'Ready for your daily practice?'}
+              </Text>
+              <Pressable onPress={startPractice} disabled={practiceCompleted} style={[
+                styles.ready_btn,
+                globalStyles.shadow,
+                practiceCompleted && { opacity: 0.5 }
+              ]}>
+                <Text style={{ fontFamily: fonts.PRIMARY, fontSize: 36, textAlign: 'center', color: colors.WHITE }}>
+                  {practiceCompleted ? 'Completed ✓' : 'Ready'}
+                </Text>
+              </Pressable>
+            </>
+          )}
 
         </ScrollView>
       </View>

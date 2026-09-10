@@ -81,7 +81,7 @@ const Grammar = () => {
         {loading ? (
           <ActivityIndicator size="large" />
         ) : error ? (
-          <Text style={styles.error}>
+          <Text>
             {error}
           </Text>
         ) : (

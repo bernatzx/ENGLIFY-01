@@ -1,12 +1,44 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../../styles/global'
+import { getPracticeHistory } from '../../services/practice'
 
 const Profile = () => {
-  const { user, logout } = useAuth()
+  const { user, logout, token } = useAuth()
 
+  const [stats, setStats] = useState({
+    practice: 0,
+    avgScore: 0,
+  })
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const histories = await getPracticeHistory(token)
+
+        const total = histories.length
+        const avgScore =
+          total > 0
+            ? Math.round(
+              histories.reduce((sum, item) => sum + item.score, 0) / total
+            )
+            : 0
+
+        setStats({
+          practice: total,
+          avgScore,
+        })
+      } catch (error) {
+        console.error('Failed to load profile stats:', error)
+      }
+    }
+
+    if (token) {
+      loadStats()
+    }
+  }, [token])
 
   return (
     <>
@@ -55,7 +87,7 @@ const Profile = () => {
             alignItems: 'center'
           }}>
             <Feather color={colors.PRIMARY} name='book-open' size={28} />
-            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>11</Text>
+            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>{stats.practice}</Text>
             <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>Practice</Text>
           </View>
           <View style={styles.divider}></View>
@@ -64,7 +96,7 @@ const Profile = () => {
             alignItems: 'center'
           }}>
             <Feather color={colors.PRIMARY} name='target' size={28} />
-            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>11</Text>
+            <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>{stats.avgScore}</Text>
             <Text style={{ fontFamily: fonts.PRIMARY, color: colors.PRIMARY, fontSize: 28 }}>Avg. Score</Text>
           </View>
         </View>

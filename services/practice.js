@@ -36,3 +36,52 @@ export const correctPractice = async (token, data) => {
 
   return response.json()
 }
+
+export const getTodayPracticeStatus = async (token) => {
+  const response = await fetch(`${API_URL}/practices/today-status`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to get practice status')
+  }
+
+  return response.json()
+}
+
+export const getPracticeHistory = async (token) => {
+  const response = await fetch(`${API_URL}/practices/history`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to get practice history')
+  }
+
+  return response.json()
+}
+
+export const savePracticeHistory = async (token, data) => {
+  const response = await fetch(`${API_URL}/practices/history`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null)
+
+    throw new Error(
+      errorData?.detail || 'Failed to save practice history'
+    )
+  }
+
+  return response.json()
+}
