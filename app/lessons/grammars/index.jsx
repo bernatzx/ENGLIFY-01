@@ -1,9 +1,10 @@
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { colors, fonts } from '../../../styles/global'
+import { colors, fonts, globalStyles } from '../../../styles/global'
 import { useAuth } from '../../../context/AuthContext'
 import { getGrammars } from '../../../services/lesson'
 import { useRouter } from 'expo-router'
+import { AntDesign } from '@expo/vector-icons'
 
 const Grammar = () => {
   const { token } = useAuth()
@@ -12,6 +13,8 @@ const Grammar = () => {
   const [grammars, setGrammars] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  const coloring = [colors.BLUE, colors.LIGHT_RED, colors.SECONDARY]
 
   useEffect(() => {
     const fetchGrammars = async () => {
@@ -28,14 +31,26 @@ const Grammar = () => {
     fetchGrammars()
   }, [token])
 
-  const renderGrammar = ({ item }) => (
-    <Pressable onPress={() => router.push(`/lessons/grammars/${item.id}`)} style={styles.card}>
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.description}>
-        {item.description}
-      </Text>
-    </Pressable>
-  )
+  const renderGrammar = ({ item }) => {
+    const randomColor = coloring[Math.floor(Math.random() * coloring.length)]
+    return (
+      <Pressable onPress={() => router.push({
+        pathname: `/lessons/grammars/${item.id}`,
+        params: {
+          name: item.name,
+          description: item.description,
+          formula: item.formula,
+          example: item.example,
+        },
+      })} style={[globalStyles.shadow, styles.card, { backgroundColor: randomColor }]}>
+        <View style={{ width: '80%' }}>
+          <Text style={styles.name}>{item.name}</Text>
+          <Text style={styles.description}>{item.description}</Text>
+        </View>
+        <AntDesign name='right' color={colors.PRIMARY_LIGTH} size={14} />
+      </Pressable>
+    )
+  }
 
   return (
     <>
@@ -43,16 +58,23 @@ const Grammar = () => {
 
         {/* HEAD */}
         <View style={styles.head}>
-          <Text style={{
-            fontFamily: fonts.PRIMARY,
-            color: colors.PRIMARY,
-            fontSize: 52
-          }}>Grammar</Text>
-          <Text style={{
-            fontFamily: fonts.SECONDARY,
-            color: colors.PRIMARY_LIGTH,
-            fontSize: 22
-          }}>Master grammar, write with confidence</Text>
+          <Pressable onPress={() => router.back()} style={styles.backButton}>
+            <AntDesign color={colors.PRIMARY_LIGTH} name='left' size={20} />
+          </Pressable>
+          <View style={{
+            flexDirection: 'column'
+          }}>
+            <Text style={{
+              fontFamily: fonts.PRIMARY,
+              color: colors.PRIMARY,
+              fontSize: 28
+            }}>Grammar</Text>
+            <Text style={{
+              fontFamily: fonts.SECONDARY,
+              color: colors.PRIMARY_LIGTH,
+              fontSize: 16
+            }}>Master grammar, write with confidence</Text>
+          </View>
         </View>
 
         {/* CONTENT */}
@@ -88,25 +110,37 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     gap: 14
   },
+  head: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20
+  },
+  backButton: {
+    backgroundColor: 'rgba(136, 136, 136, 0.2)',
+    padding: 10,
+    borderRadius: 14
+  },
   list: {
+    width: '100%',
     gap: 14,
     paddingBottom: 20,
   },
   card: {
-    backgroundColor: '#fff',
     padding: 18,
     borderRadius: 16,
-    gap: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   name: {
     fontFamily: fonts.PRIMARY,
     color: colors.PRIMARY,
-    fontSize: 24,
+    fontSize: 22,
+    textTransform: 'capitalize'
   },
   description: {
     fontFamily: fonts.SECONDARY,
-    fontSize: 16,
-    color: colors.PRIMARY_LIGTH,
-  },
-
+    fontSize: 14,
+    color: colors.PRIMARY_LIGTH
+  }
 })
