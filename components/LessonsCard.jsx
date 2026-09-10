@@ -16,7 +16,7 @@ const LessonsCard = () => {
       iconcolor: '#e78967',
       bordercolor: '#f7c1ae',
       icon: 'edit-3',
-      route: '/lessons/grammar'
+      route: '/lessons/grammars/'
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ const LessonsCard = () => {
       iconcolor: '#4996b5',
       bordercolor: '#94d0dc',
       icon: 'book-open',
-      route: '/lessons/vocabulary'
+      route: '/lessons/vocabulary/'
     }
   ]
   return (
