@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect, Stack } from 'expo-router'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import { AuthProvider, useAuth } from '../context/AuthContext'
 
 const AppStack = () => {
@@ -10,9 +10,7 @@ const AppStack = () => {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Loading...</Text>
-      </View>
+      <ActivityIndicator size='large' />
     )
   }
 

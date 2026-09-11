@@ -4,7 +4,8 @@ import {
   Text,
   TextInput,
   Pressable,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator
 } from 'react-native'
 import { useAuth } from '../../context/AuthContext'
 import { Feather } from '@expo/vector-icons'
@@ -103,10 +104,14 @@ const Login = () => {
 
       <View style={{ width: '100%', flexDirection: 'column', gap: 14 }}>
         <Pressable onPress={handleLogin} disabled={loading} style={styles.login_btn}>
-          <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
-            Login
-          </Text>
-          <Feather color={colors.WHITE} name="arrow-right" size={20} />
+          {loading ? (<ActivityIndicator size='small' color={colors.WHITE} />) : (
+            <>
+              <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
+                Login
+              </Text>
+              <Feather color={colors.WHITE} name="arrow-right" size={20} />
+            </>
+          )}
         </Pressable>
         <View style={styles.signup}>
           <Text style={{ color: colors.PRIMARY, fontFamily: fonts.SECONDARY, fontSize: 16 }}>Don't have an account? </Text>

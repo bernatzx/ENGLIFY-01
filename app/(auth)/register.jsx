@@ -4,7 +4,8 @@ import {
   Text,
   TextInput,
   Pressable,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
@@ -56,7 +57,7 @@ const Register = () => {
       if (!result.success) {
         setError(result.message)
         return
-      } 
+      }
       router.replace({
         pathname: '/verify-email',
         params: { email: cleanEmail }
@@ -141,10 +142,14 @@ const Register = () => {
 
       <View style={styles.bottom}>
         <Pressable style={styles.register_btn} disabled={loading} onPress={handleRegister}>
-          <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
-            Register
-          </Text>
-          <Feather color={colors.WHITE} name="arrow-right" size={20} />
+          {loading ? (<ActivityIndicator size='small' color={colors.WHITE} />) : (
+            <>
+              <Text style={{ fontSize: 24, color: colors.WHITE, fontFamily: fonts.PRIMARY }}>
+                Register
+              </Text>
+              <Feather color={colors.WHITE} name="arrow-right" size={20} />
+            </>
+          )}
         </Pressable>
         <View style={styles.signin}>
           <Text style={{ color: colors.PRIMARY, fontFamily: fonts.SECONDARY, fontSize: 16 }}>Already have an account? </Text>
