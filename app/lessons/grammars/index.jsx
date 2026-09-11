@@ -5,6 +5,7 @@ import { useAuth } from '../../../context/AuthContext'
 import { getGrammars } from '../../../services/lesson'
 import { useRouter } from 'expo-router'
 import { AntDesign } from '@expo/vector-icons'
+import AnimatedPressable from '../../../components/AnimatedPressable'
 
 const Grammar = () => {
   const { token } = useAuth()
@@ -34,7 +35,7 @@ const Grammar = () => {
   const renderGrammar = ({ item }) => {
     const randomColor = coloring[Math.floor(Math.random() * coloring.length)]
     return (
-      <Pressable onPress={() => router.push({
+      <AnimatedPressable onPress={() => router.push({
         pathname: `/lessons/grammars/${item.id}`,
         params: {
           name: item.name,
@@ -48,7 +49,7 @@ const Grammar = () => {
           <Text style={styles.description}>{item.description}</Text>
         </View>
         <AntDesign name='right' color={colors.PRIMARY_LIGTH} size={14} />
-      </Pressable>
+      </AnimatedPressable>
     )
   }
 

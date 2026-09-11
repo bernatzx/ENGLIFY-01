@@ -5,6 +5,7 @@ import { colors, fonts, globalStyles } from '../../styles/global'
 import { AntDesign } from '@expo/vector-icons'
 import { useAuth } from '../../context/AuthContext'
 import { getPracticeHistory } from '../../services/practice'
+import AnimatedPressable from '../../components/AnimatedPressable'
 
 const Lessons = () => {
   const { token } = useAuth()
@@ -40,7 +41,7 @@ const Lessons = () => {
   const renderBox = ({ item }) => {
     const randomColor = coloring[Math.floor(Math.random() * coloring.length)]
     return (
-      <Pressable onPress={() => router.push(`/histories/${item.id}`)} style={[styles.card, globalStyles.shadow, { backgroundColor: randomColor }]}>
+      <AnimatedPressable onPress={() => router.push(`/histories/${item.id}`)} style={[styles.card, globalStyles.shadow, { backgroundColor: randomColor }]}>
         <View>
           <Text style={{
             fontFamily: fonts.PRIMARY,
@@ -74,7 +75,7 @@ const Lessons = () => {
           </View>
           <AntDesign color={colors.PRIMARY} name='right' size={18} />
         </View>
-      </Pressable>
+      </AnimatedPressable>
     )
   }
 

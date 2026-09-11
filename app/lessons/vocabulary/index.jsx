@@ -5,6 +5,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { useAuth } from '../../../context/AuthContext'
 import { getVocabularies } from '../../../services/lesson'
+import AnimatedPressable from '../../../components/AnimatedPressable'
 
 const Vocabulary = () => {
   const { token } = useAuth()
@@ -33,7 +34,7 @@ const Vocabulary = () => {
   const renderVocabularies = ({ item }) => {
     const randomColor = coloring[Math.floor(Math.random() * coloring.length)]
     return (
-      <Pressable onPress={() => router.push({
+      <AnimatedPressable onPress={() => router.push({
         pathname: `/lessons/vocabulary/${item.id}`,
         params: {
           word: item.word,
@@ -47,7 +48,7 @@ const Vocabulary = () => {
           <Text style={styles.meaning}>{item.meaning}</Text>
         </View>
         <AntDesign name='right' color={colors.PRIMARY_LIGTH} size={14} />
-      </Pressable>
+      </AnimatedPressable>
     )
   }
 

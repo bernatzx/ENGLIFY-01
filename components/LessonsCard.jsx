@@ -3,6 +3,7 @@ import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../styles/global'
 import { useRouter } from 'expo-router'
+import AnimatedPressable from './AnimatedPressable'
 
 const LessonsCard = () => {
   const router = useRouter()
@@ -32,7 +33,8 @@ const LessonsCard = () => {
   return (
     <View style={styles.container}>
       {lessons.map((lesson) => (
-        <View
+        <AnimatedPressable
+          onPress={() => router.push(lesson.route)}
           key={lesson.id}
           style={[
             styles.cards,
@@ -51,20 +53,18 @@ const LessonsCard = () => {
               padding: 12,
               borderRadius: 14
             }} name={lesson.icon} size={20} />
-            <Pressable onPress={() => router.push(lesson.route)}>
-              <Feather style={{
-                backgroundColor: colors.WHITE,
-                color: lesson.iconcolor,
-                padding: 6,
-                borderRadius: 20
-              }} name='arrow-right' size={20} />
-            </Pressable>
+            <Feather style={{
+              backgroundColor: colors.WHITE,
+              color: lesson.iconcolor,
+              padding: 6,
+              borderRadius: 20
+            }} name='arrow-right' size={20} />
           </View>
           <Text style={{ fontSize: 26, marginBottom: 5, fontFamily: fonts.PRIMARY, color: colors.PRIMARY }}>
             {lesson.title}
           </Text>
           <Text style={{ color: colors.PRIMARY, fontFamily: fonts.SECONDARY }}>{lesson.subtitle}</Text>
-        </View>
+        </AnimatedPressable>
       ))}
     </View>
   )
