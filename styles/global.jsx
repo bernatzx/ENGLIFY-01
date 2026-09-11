@@ -9,7 +9,8 @@ export const colors = {
   WHITE: '#f8ede3',
   RED: '#f08080',
   LIGHT_RED: '#f1c4c4',
-  BLUE: '#acd5dd'
+  BLUE: '#acd5dd',
+  DARK_BLUE: '#71b9c7'
 }
 
 export const fonts = {

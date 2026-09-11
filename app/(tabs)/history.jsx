@@ -41,7 +41,18 @@ const Lessons = () => {
   const renderBox = ({ item }) => {
     const randomColor = coloring[Math.floor(Math.random() * coloring.length)]
     return (
-      <AnimatedPressable onPress={() => router.push(`/histories/${item.id}`)} style={[styles.card, globalStyles.shadow, { backgroundColor: randomColor }]}>
+      <AnimatedPressable onPress={() => router.push({
+        pathname: `/histories/${item.id}`,
+        params: {
+          answer: item.answer,
+          explanation: JSON.stringify(item.explanation),
+          corrected_answer: item.corrected_answer,
+          score: item.score,
+          grammar: JSON.stringify(item.grammar),
+          vocabulary: JSON.stringify(item.vocabulary),
+          completed_at: item.completed_at
+        },
+      })} style={[styles.card, globalStyles.shadow, { backgroundColor: randomColor }]}>
         <View>
           <Text style={{
             fontFamily: fonts.PRIMARY,

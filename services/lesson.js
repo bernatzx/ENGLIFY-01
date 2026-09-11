@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.0.144:8000'
+import { API_URL } from "./config"
 
 export const getGrammars = async (token) => {
   const response = await fetch(`${API_URL}/lessons/grammar`, {

@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons'
 import { colors, fonts, globalStyles } from '../../styles/global'
 import { getPracticeHistory } from '../../services/practice'
+import AnimatedPressable from '../../components/AnimatedPressable'
 
 const Profile = () => {
   const { user, logout, token } = useAuth()
@@ -102,7 +103,7 @@ const Profile = () => {
         </View>
 
         {/* FOOT */}
-        <Pressable style={styles.foot} onPress={logout}>
+        <AnimatedPressable style={styles.foot} onPress={logout}>
           <View style={{
             flexDirection: 'row',
             gap: 14,
@@ -121,7 +122,7 @@ const Profile = () => {
             }}>Log Out</Text>
           </View>
           <AntDesign color={colors.PRIMARY} name='right' size={18} />
-        </Pressable>
+        </AnimatedPressable>
       </View >
     </>
   )

@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.0.144:8000'
+import { API_URL } from "./config"
 
 export const register = async (name, email, password) => {
   try {
